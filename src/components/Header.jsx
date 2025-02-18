@@ -8,13 +8,29 @@ const HeaderEl = styled.header`
   background-color: var(--colors-ui-base);
 `;
 
-const Wrapper = styled.div``;
+const Wrapper = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2rem 0;
+`;
 
 const Title = styled.a.attrs({
-  href: "#",
-})``;
+  href: "/",
+})`
+  color: var(--colors-text);
+  font-size: var(--fs-sm);
+  text-decoration: none;
+  font-weight: var(--fw-bold);
+`;
 
-const ModeSwitcher = styled.div``;
+const ModeSwitcher = styled.div`
+  color: var(--colors-text);
+  font-size: var(--fs-sm);
+  cursor: pointer;
+  /* font-weight: var(--fw-bold); */
+  text-transform: capitalize;
+`;
 
 const Header = () => {
   const [theme, setTheme] = useState("light");
@@ -33,7 +49,12 @@ const Header = () => {
         <Wrapper>
           <Title>Where in the world?</Title>
           <ModeSwitcher onClick={toggleTheme}>
-            <IoMoon /> Light theme
+            {theme === "light" ? (
+              <IoMoonOutline size="14px" />
+            ) : (
+              <IoMoon size="14px" />
+            )}{" "}
+            <span style={{ marginLeft: "0.75rem" }}>{theme} Theme</span>
           </ModeSwitcher>
         </Wrapper>
       </Container>
