@@ -36,7 +36,11 @@ const Search = ({ search, setSearch }) => {
   return (
     <InputContainer>
       <IoSearch size={24} />
-      <Input onChange={(e) => setSearch(e.target.value)} value={search} />
+      <Input
+        onChange={(e) => setSearch(e.target.value)}
+        value={search}
+        name="search"
+      />
     </InputContainer>
   );
 };
