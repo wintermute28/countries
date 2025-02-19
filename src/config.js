@@ -1,8 +1,19 @@
-const BASE_URL = "https://restcountries.com/v3.1";
+// const BASE_URL = "https://restcountries.com/v3.1/";
 
-export const ALL_COUNTRIES = BASE_URL + "all";
+// export const ALL_COUNTRIES =
+//   BASE_URL + "all?fields=name,capital,flags,population,region";
 
-export const searchByCounrty = (name) => BASE_URL + "/name/" + name;
+// export const searchByCounrty = (name) => BASE_URL + "name/" + name;
 
-export const dilterByCode = (code) =>
-  BASE_URL + "/alpha?codes=" + code.join(",");
+// export const dilterByCode = (code) =>
+//   BASE_URL + "alpha?codes=" + code.join(",");
+
+const BASE_URL = "https://restcountries.com/v2/";
+
+export const ALL_COUNTRIES =
+  BASE_URL + "all?fields=name,capital,flags,population,region";
+
+export const searchByCountry = (name) => BASE_URL + "name/" + name;
+
+export const filterByCode = (codes) =>
+  BASE_URL + "alpha?codes=" + codes.join(",");
