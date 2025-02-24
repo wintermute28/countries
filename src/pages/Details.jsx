@@ -1,30 +1,45 @@
 import { useParams, useNavigate } from "react-router-dom";
-import axios from "axios";
-import { useState, useEffect } from "react";
+// import axios from "axios";
+import { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { IoArrowBack } from "react-icons/io5";
-import { searchByCountry } from "../config";
+// import { searchByCountry } from "../config";
 import Button from "../components/Button";
 import Info from "../components/Info";
+import { selectDetails } from "../store/details/details-selector";
+import {
+  clearDetails,
+  loadCountryByName,
+} from "../store/details/details-actions";
 
 const Details = () => {
   const { name } = useParams();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
-  const [country, setCountry] = useState(null);
+  // const [country, setCountry] = useState(null);
 
-  useEffect(() => {
-    axios.get(searchByCountry(name)).then(({ data }) => setCountry(data[0]));
-  }, [name]);
+  const { currentCountry, error, status } = useSelector(selectDetails);
 
   const handleGoBack = () => {
     navigate(-1);
   };
+
+  useEffect(() => {
+    dispatch(loadCountryByName(name));
+
+    return () => {
+      dispatch(clearDetails());
+    };
+  }, [name, dispatch]);
 
   return (
     <div>
       <Button onClick={handleGoBack}>
         <IoArrowBack /> Back
       </Button>
-      {country && <Info {...country} navigate={navigate} />}
+      {status === "loading" && <h2>Loading...</h2>}
+      {error && <h2>{error}</h2>}
+      {currentCountry && <Info {...currentCountry} navigate={navigate} />}
     </div>
   );
 };

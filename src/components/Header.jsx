@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
@@ -41,12 +41,6 @@ const Header = () => {
 
   const toggleTheme = () =>
     dispatch(setTheme(theme === "light" ? "dark" : "light"));
-
-  // const [theme, setTheme] = useState("light");
-
-  // const toggleTheme = () => {
-  //   setTheme(theme === "light" ? "dark" : "light");
-  // };
 
   const cleanUp = () => dispatch(clearControls());
 
