@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { IoMoon, IoMoonOutline } from "react-icons/io5";
 import { Container } from "./Container";
 import { setTheme } from "../store/theme/theme-actions";
+import { clearControls } from "../store/controls/controls-actions";
 
 const HeaderEl = styled.header`
   box-shadow: var(--shadow);
@@ -47,6 +48,8 @@ const Header = () => {
   //   setTheme(theme === "light" ? "dark" : "light");
   // };
 
+  const cleanUp = () => dispatch(clearControls());
+
   useEffect(() => {
     document.body.setAttribute("data-theme", theme);
   }, [theme]);
@@ -55,7 +58,7 @@ const Header = () => {
     <HeaderEl>
       <Container>
         <Wrapper>
-          <Title>Where in the world?</Title>
+          <Title onClick={cleanUp}>Where in the world?</Title>
           <ModeSwitcher onClick={toggleTheme}>
             {theme === "light" ? (
               <IoMoonOutline size="14px" />
