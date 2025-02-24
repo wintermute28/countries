@@ -1,7 +1,8 @@
 import styled from "styled-components";
-import axios from "axios";
-import { useState, useEffect } from "react";
-import { filterByCode } from "../config";
+import { useEffect } from "react";
+import { useSelector, useDispatch, shallowEqual } from "react-redux";
+import { selectNeighbors } from "../store/details/details-selector";
+import { loadNeighborsByBorder } from "../store/details/details-actions";
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -106,15 +107,15 @@ const Info = (props) => {
     navigate,
   } = props;
 
-  const [neighbors, setNeighbors] = useState([]);
+  const dispatch = useDispatch();
+
+  const neighbors = useSelector(selectNeighbors, shallowEqual);
 
   useEffect(() => {
     if (borders.length) {
-      axios
-        .get(filterByCode(borders))
-        .then(({ data }) => setNeighbors(data.map((country) => country.name)));
+      dispatch(loadNeighborsByBorder(borders));
     }
-  }, [borders]);
+  }, [borders, dispatch]);
 
   return (
     <Wrapper>
@@ -157,7 +158,7 @@ const Info = (props) => {
             <ListItem>
               <b>Language: </b>
               {languages.map((el) => (
-                <span key={el.name}>{el.name}</span>
+                <span key={el.name}>{el.name} </span>
               ))}
             </ListItem>
           </List>
@@ -173,7 +174,7 @@ const Info = (props) => {
                   key={border}
                   onClick={() => navigate(`/country/${border}`)}
                 >
-                  {border}{" "}
+                  {border}
                 </Tag>
               ))}
             </TagGroup>

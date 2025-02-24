@@ -40,7 +40,7 @@ const HomePage = () => {
         <List>
           {countries.map((c) => {
             const countryInfo = {
-              img: c.flags.png,
+              img: c.flags.svg || c.flags.png,
               name: c.name,
               info: [
                 {

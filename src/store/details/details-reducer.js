@@ -2,13 +2,15 @@ import {
   SET_ERROR,
   SET_LOADING,
   SET_COUNTRY,
-  CLEAR_DATAILS,
+  CLEAR_DETAILS,
+  SET_NEIGHBORS,
 } from "./details-actions";
 
 const initialState = {
   currentCountry: null,
   status: "idle",
   error: null,
+  neighbors: [],
 };
 
 export const delailsReducer = (state = initialState, { type, payload }) => {
@@ -34,8 +36,14 @@ export const delailsReducer = (state = initialState, { type, payload }) => {
         currentCountry: payload,
       };
 
-    case CLEAR_DATAILS:
+    case CLEAR_DETAILS:
       return initialState;
+
+    case SET_NEIGHBORS:
+      return {
+        ...state,
+        neighbors: payload,
+      };
 
     default:
       return state;
