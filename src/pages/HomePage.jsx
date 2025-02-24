@@ -2,52 +2,27 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector, shallowEqual } from "react-redux";
 
-// import { Controls } from "../components/Controls";
+import { Controls } from "../components/Controls";
 import List from "../components/List";
 import Card from "../components/Card";
+
 import {
-  selectAllCountries,
   selectCountriesInfo,
+  selectVisibleCountries,
 } from "../store/countries/countries-selectors";
 import { loadCountries } from "../store/countries/countries-actions";
+import { selectSearch } from "../store/controls/controls-selectors";
 
-// eslint-disable-next-line react/prop-types
 const HomePage = () => {
-  // const [filteredCountries, setFilteredCountries] = useState(countries);
-
   const navigate = useNavigate();
 
   const dispatch = useDispatch();
+  const search = useSelector(selectSearch);
 
-  const countriesR = useSelector(selectAllCountries);
+  const countries = useSelector((state) =>
+    selectVisibleCountries(state, { search })
+  );
   const { status, error, qty } = useSelector(selectCountriesInfo, shallowEqual);
-
-  // const handleSearch = (search, region) => {
-  //   let data = [...countries];
-
-  //   if (region) {
-  //     data = data.filter((c) => c.region.includes(region));
-  //   }
-
-  //   if (search) {
-  //     data = data.filter((c) =>
-  //       c.name.toLowerCase().includes(search.toLowerCase())
-  //     );
-  //   }
-
-  //   setFilteredCountries(data);
-  // };
-
-  //   useEffect(() => {
-  // =    if (!countries.length)
-  //       axios.get(ALL_COUNTRIES).then(({ data }) => setCountries(data));
-  //   }, []);
-
-  // useEffect(() => {
-  //   handleSearch();
-  //   // eslint-disable-next-line
-  // }, [countries]);
-
   useEffect(() => {
     if (!qty) {
       dispatch(loadCountries());
@@ -56,16 +31,14 @@ const HomePage = () => {
 
   return (
     <>
-      {/* <Controls
-      onSearch={handleSearch}
-      /> */}
+      <Controls />
 
       {error && <p>Cant load countries</p>}
       {status === "loading" && <p>Loading...</p>}
 
       {status === "received" && (
         <List>
-          {countriesR.map((c) => {
+          {countries.map((c) => {
             const countryInfo = {
               img: c.flags.png,
               name: c.name,
