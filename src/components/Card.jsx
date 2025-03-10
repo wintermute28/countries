@@ -43,7 +43,7 @@ const CardListItem = styled.li`
   }
 `;
 
-const Card = ({ img, name, info = [], onClick }) => {
+export const Card = ({ img, name, info = [], onClick }) => {
   return (
     <Wrapper onClick={onClick}>
       <CardImage src={img} alt={name} />
@@ -61,4 +61,3 @@ const Card = ({ img, name, info = [], onClick }) => {
   );
 };
 
-export default Card;

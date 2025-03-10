@@ -22,7 +22,7 @@ const controlsSlise = createSlice({
 });
 
 export const { setRegion, setSearch, clearControls } = controlsSlise.actions;
-export const controlsReduser = controlsSlise.reduser;
+export const controlsReducer = controlsSlise.reducer;
 
 export const selectSearch = (state) => state.controls.search;
 export const selectRegion = (state) => state.controls.region;

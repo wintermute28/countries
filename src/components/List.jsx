@@ -21,8 +21,6 @@ const Wrapper = styled.section`
   }
 `;
 
-const List = ({ children }) => {
+export const List = ({ children }) => {
   return <Wrapper>{children}</Wrapper>;
 };
-
-export default List;

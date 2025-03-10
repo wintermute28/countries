@@ -2,13 +2,15 @@ import axios from "axios";
 import { configureStore } from "@reduxjs/toolkit";
 
 import * as api from "./config";
-import { themeReduser } from "./features/theme/theme-slice";
-import { controlsReduser } from "./features/controls/controls-slice";
+import { themeReducer } from "./features/theme/theme-slice";
+import { controlsReducer } from "./features/controls/controls-slice";
+import { countriesReducer } from "./features/countries/countries-slice";
 
 export const store = configureStore({
-  reduser: {
-    theme: themeReduser,
-    controls: controlsReduser,
+  reducer: {
+    theme: themeReducer,
+    controls: controlsReducer,
+    countries: countriesReducer,
   },
   devTools: true,
   middleware: (getDefaultMiddlware) =>
