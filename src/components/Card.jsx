@@ -60,4 +60,3 @@ export const Card = ({ img, name, info = [], onClick }) => {
     </Wrapper>
   );
 };
-
