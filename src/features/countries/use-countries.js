@@ -22,5 +22,5 @@ export const useCountries = () => {
     }
   }, [qty, dispatch]);
 
-  return [countries, status, error, qty];
+  return [countries, status, error];
 };
