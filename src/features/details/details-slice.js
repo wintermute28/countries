@@ -1,9 +1,32 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
-export const loadCounrtyByName = createAsyncThunk(
+// export const loadCountryByName = createAsyncThunk(
+//   "@@details/load-country-by-name",
+//   (name, { extra: { client, api } }) => {
+//     return client.get(api.searchByCountry(name));
+//   }
+// );
+
+// export const loadNeighborsByBorder = createAsyncThunk(
+//   "@@details/load-neighbors",
+//   (borders, { extra: { client, api } }) => {
+//     return client.get(api.filterByCode(borders));
+//   }
+// );
+
+export const loadCountryByName = createAsyncThunk(
   "@@details/load-country-by-name",
-  (name, { extra: { client, api } }) => {
-    return client.get(api.searchByCountry(name));
+  async (name, { extra: { client, api } }) => {
+    const response = await client.get(api.searchByCountry(name));
+    return response.data; // Возвращаем только данные
+  }
+);
+
+export const loadNeighborsByBorder = createAsyncThunk(
+  "@@details/load-neighbors",
+  async (borders, { extra: { client, api } }) => {
+    const response = await client.get(api.filterByCode(borders));
+    return response.data; // Возвращаем только данные
   }
 );
 
@@ -22,17 +45,20 @@ const detailsSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loadCounrtyByName.pending, (state) => {
+      .addCase(loadCountryByName.pending, (state) => {
         state.status = "loading";
         state.error = null;
       })
-      .addCase(loadCounrtyByName.rejected, (state, action) => {
+      .addCase(loadCountryByName.rejected, (state, action) => {
         state.status = "rejected";
         state.error = action.payload || action.meta.error;
       })
-      .addCase(loadCounrtyByName.fulfilled, (state, action) => {
+      .addCase(loadCountryByName.fulfilled, (state, action) => {
         state.status = "idle";
-        state.currentCountry = action.payload.data[0];
+        state.currentCountry = action.payload[0]; // Теперь action.payload — это уже data
+      })
+      .addCase(loadNeighborsByBorder.fulfilled, (state, action) => {
+        state.neighbors = action.payload.map((country) => country.name); // payload — это уже data
       });
   },
 });

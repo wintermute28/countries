@@ -1,6 +1,7 @@
+/* eslint-disable react/prop-types */
 import styled from "styled-components";
-import { useEffect } from "react";
-import { useSelector, useDispatch, shallowEqual } from "react-redux";
+
+import { useNeighbors } from "./use-neighbors";
 
 const Wrapper = styled.section`
   margin-top: 3rem;
@@ -105,15 +106,7 @@ const Info = (props) => {
     navigate,
   } = props;
 
-  const dispatch = useDispatch();
-
-  const neighbors = useSelector(selectNeighbors, shallowEqual);
-
-  useEffect(() => {
-    if (borders.length) {
-      dispatch(loadNeighborsByBorder(borders));
-    }
-  }, [borders, dispatch]);
+  const neighbors = useNeighbors(borders);
 
   return (
     <Wrapper>

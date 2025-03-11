@@ -15,8 +15,8 @@ export const store = configureStore({
     details: detailsReducer,
   },
   devTools: true,
-  middleware: (getDefaultMiddlware) =>
-    getDefaultMiddlware({
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
       thunk: {
         extraArgument: {
           client: axios,
