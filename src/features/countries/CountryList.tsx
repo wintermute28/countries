@@ -9,7 +9,7 @@ import { CountryInfo } from "../../types";
 export const CountryList = () => {
   const navigate = useNavigate();
 
-  const [countries, status, error] = useCountries();
+  const [countries, { status, error }] = useCountries();
 
   return (
     <>
