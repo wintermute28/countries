@@ -4,6 +4,8 @@ import { List } from "../../components/List";
 import { Card } from "../../components/Card";
 import { useCountries } from "./use-countries";
 
+import { CountryInfo } from "../../types";
+
 export const CountryList = () => {
   const navigate = useNavigate();
 
@@ -17,7 +19,7 @@ export const CountryList = () => {
       {status === "received" && (
         <List>
           {countries.map((c) => {
-            const countryInfo = {
+            const countryInfo: CountryInfo = {
               img: c.flags.svg || c.flags.png,
               name: c.name,
               info: [
@@ -38,7 +40,7 @@ export const CountryList = () => {
             return (
               <Card
                 key={c.name}
-                onClick={() => navigate(`/country/${c.name}`)}
+                onClick={() => void navigate(`/country/${c.name}`)}
                 {...countryInfo}
               />
             );

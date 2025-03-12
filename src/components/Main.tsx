@@ -1,4 +1,6 @@
 import styled from "styled-components";
+import { ReactNode } from "react";
+
 import { Container } from "./Container";
 
 const Wrapper = styled.main`
@@ -9,7 +11,11 @@ const Wrapper = styled.main`
   }
 `;
 
-const Main = ({ children }) => {
+interface IMainProps {
+  children: ReactNode;
+}
+
+const Main = ({ children }: IMainProps) => {
   return (
     <Wrapper>
       <Container>{children}</Container>

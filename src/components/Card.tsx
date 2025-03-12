@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+import { CountryInfo } from "../types";
+
 const Wrapper = styled.article`
   border-radius: var(--radii);
   background-color: var(--colors-ui-base);
@@ -42,8 +44,11 @@ const CardListItem = styled.li`
     font-weight: var(--fw-bold);
   }
 `;
+interface ICardProps extends CountryInfo {
+  onClick: () => void;
+}
 
-export const Card = ({ img, name, info = [], onClick }) => {
+export const Card = ({ img, name, info = [], onClick }: ICardProps) => {
   return (
     <Wrapper onClick={onClick}>
       <CardImage src={img} alt={name} />
