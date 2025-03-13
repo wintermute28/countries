@@ -1,9 +1,9 @@
-/* eslint-disable react/prop-types */
 import styled from "styled-components";
+import { NavigateFunction } from "react-router-dom";
 
 import { useNeighbors } from "./use-neighbors";
+
 import { Country } from "../../types";
-import { NavigateFunction } from "react-router-dom";
 
 const Wrapper = styled.section`
   margin-top: 3rem;

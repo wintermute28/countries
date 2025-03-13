@@ -1,6 +1,6 @@
 import { createSelector } from "@reduxjs/toolkit";
+
 import { RootState } from "../../store";
-import { Country } from "../../types";
 
 export const selectCountriesInfo = createSelector(
   [(state: RootState) => state.countries],

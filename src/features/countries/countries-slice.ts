@@ -1,32 +1,17 @@
-import {
-  createAsyncThunk,
-  createSlice,
-  createSelector,
-} from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 import { Status, Country, Extra } from "../../types";
 
-// export const loadCountries = createAsyncThunk<
-//   Country[],
-//   undefined,
-//   { extra: Extra }
-// >("@@countries/load-countries", async (__, { extra: { client, api } }) => {
-//   const response = await client.get(api.ALL_COUNTRIES);
-//   return {
-//     data: response.data,
-//   };
-// });
-
 export const loadCountries = createAsyncThunk<
-  Country[], // Тип возвращаемого значения
-  undefined, // Тип аргументов (нет аргументов - используем undefined)
-  { extra: Extra } // Тип для дополнительных настроек thunkAPI
+  Country[],
+  undefined,
+  { extra: Extra }
 >(
   "@@countries/load-countries",
   async (_, { extra: { client, api }, rejectWithValue }) => {
     try {
       const response = await client.get<Country[]>(api.ALL_COUNTRIES);
-      return response.data; // Возвращаем массив стран напрямую
+      return response.data;
     } catch (error) {
       if (error instanceof Error) {
         return rejectWithValue(error.message);

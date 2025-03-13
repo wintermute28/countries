@@ -1,6 +1,6 @@
 # Countries Info App
 
-This is a small application built using [React](https://react.dev/), [Redux Toolkit](https://redux-toolkit.js.org/), and [Vite](https://vite.dev/), where you can get basic information about countries around the world.
+This is a small application built using [React](https://react.dev/), [Redux Toolkit](https://redux-toolkit.js.org/), [TypeScript](https://www.typescriptlang.org/) and [Vite](https://vite.dev/), where you can get basic information about countries around the world.
 
 [Demo](https://countries-two-chi.vercel.app/)
 

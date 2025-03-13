@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { useSelector, shallowEqual } from "react-redux";
+
 import { loadNeighborsByBorder } from "./details-slice";
 import { selectNeighbors } from "./details-selectors";
 import { useAppDispatch } from "../../store";
